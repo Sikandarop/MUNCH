@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Munch Fast Food – Kohat</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+/* ─── VARIABLES ─────────────────────────────────────────────── */
+:root{
+  --red:#d62828;
+  --red2:#ff3c3c;
+  --yellow:#f7b731;
+  --dark:#0d0d0d;
+  --dark2:#161616;
+  --dark3:#1e1e1e;
+  --card-bg:rgba(30,30,30,.75);
+  --text:#f0ede8;
+  --muted:#9e9e9e;
+  --radius:18px;
+  --font-head:'Bebas Neue',sans-serif;
+  --font-body:'Barlow',sans-serif;
+}
+
+/* ─── RESET & BASE ───────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--dark);color:var(--text);font-family:var(--font-body);overflow-x:hidden;line-height:1.6}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+ul{list-style:none}
+section{padding:80px 20px}
+
+/* ─── UTILITY ────────────────────────────────────────────────── */
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+.tag{display:inline-block;background:var(--red);color:#fff;font-family:var(--font-head);letter-spacing:2px;font-size:.75rem;padding:4px 14px;border-radius:40px;margin-bottom:12px}
+.section-title{font-family:var(--font-head);font-size:clamp(2.2rem,5vw,3.5rem);line-height:1;color:#fff;margin-bottom:8px}
+.section-title span{color:var(--yellow)}
+.section-sub{color:var(--muted);font-size:1rem;margin-bottom:48px;max-width:520px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 30px;border-radius:50px;font-family:var(--font-head);letter-spacing:1.5px;font-size:1rem;cursor:pointer;border:2px solid transparent;transition:all .3s}
+.btn-red{background:var(--red);color:#fff}
+.btn-red:hover{background:var(--red2);transform:translateY(-2px);box-shadow:0 8px 30px rgba(214,40,40,.45)}
+.btn-outline{background:transparent;border-color:var(--yellow);color:var(--yellow)}
+.btn-outline:hover{background:var(--yellow);color:#000;transform:translateY(-2px)}
+.btn-yellow{background:var(--yellow);color:#000}
+.btn-yellow:hover{background:#ffd000;transform:translateY(-2px);box-shadow:0 8px 30px rgba(247,183,49,.35)}
+.glass{background:var(--card-bg);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.07)}
+
+/* ─── NOISE OVERLAY ─────────────────────────────────────────── */
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.5}
+
+/* ─── NAVBAR ────────────────────────────────────────────────── */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 24px;height:68px;display:flex;align-items:center;justify-content:space-between;transition:background .4s,box-shadow .4s}
+nav.scrolled{background:rgba(13,13,13,.95);backdrop-filter:blur(20px);box-shadow:0 2px 40px rgba(0,0,0,.6)}
+.logo{font-family:var(--font-head);font-size:1.9rem;letter-spacing:2px;color:#fff}
+.logo span{color:var(--yellow)}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{font-size:.9rem;font-weight:600;letter-spacing:.5px;color:var(--muted);transition:color .3s;text-transform:uppercase}
+.nav-links a:hover{color:var(--yellow)}
+.nav-links .btn{padding:9px 22px;font-size:.85rem}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px}
+.hamburger span{display:block;width:26px;height:2px;background:#fff;border-radius:4px;transition:all .3s}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mobile-menu{display:none;position:fixed;top:68px;left:0;right:0;background:rgba(13,13,13,.97);backdrop-filter:blur(20px);padding:24px;z-index:999;border-bottom:1px solid rgba(255,255,255,.06)}
+.mobile-menu a{display:block;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.05);font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);transition:color .3s}
+.mobile-menu a:hover{color:var(--yellow)}
+
+/* ─── HERO ──────────────────────────────────────────────────── */
+#hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;padding:0 24px}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#0d0d0d 0%,#1a0000 50%,#0d0d0d 100%);z-index:0}
+.hero-bg::after{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=1600&q=80') center/cover no-repeat;opacity:.18;mix-blend-mode:luminosity}
+.hero-glow{position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(214,40,40,.25) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);z-index:1;animation:pulse 4s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.8}50%{transform:translate(-50%,-50%) scale(1.1);opacity:1}}
+.hero-content{position:relative;z-index:2;max-width:780px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(247,183,49,.12);border:1px solid rgba(247,183,49,.3);border-radius:50px;padding:6px 18px;font-size:.85rem;color:var(--yellow);margin-bottom:24px;animation:fadeDown .8s ease both}
+.hero-badge i{font-size:.7rem}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+.hero-title{font-family:var(--font-head);font-size:clamp(3.5rem,9vw,7rem);line-height:.95;color:#fff;margin-bottom:16px;animation:fadeUp .9s ease .1s both}
+.hero-title span{color:var(--yellow);display:block}
+.hero-title em{color:var(--red);font-style:normal}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.hero-sub{font-size:1.1rem;color:rgba(240,237,232,.7);margin-bottom:36px;animation:fadeUp .9s ease .25s both}
+.hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;animation:fadeUp .9s ease .4s both}
+.hero-stats{display:flex;gap:32px;justify-content:center;margin-top:52px;animation:fadeUp .9s ease .55s both}
+.stat{text-align:center}
+.stat-num{font-family:var(--font-head);font-size:2rem;color:var(--yellow);line-height:1}
+.stat-label{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+.hero-scroll{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);z-index:2;animation:bounce 2s ease infinite}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-8px)}}
+.hero-scroll span{display:block;width:26px;height:42px;border:2px solid rgba(255,255,255,.3);border-radius:14px;position:relative;margin:0 auto}
+.hero-scroll span::after{content:'';position:absolute;top:6px;left:50%;transform:translateX(-50%);width:4px;height:8px;background:#fff;border-radius:4px;animation:scrollDot 2s ease infinite}
+@keyframes scrollDot{0%{top:6px;opacity:1}100%{top:22px;opacity:0}}
+
+/* ─── ABOUT ─────────────────────────────────────────────────── */
+#about{background:var(--dark2);position:relative;overflow:hidden}
+#about::before{content:'';position:absolute;right:-100px;top:-100px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(214,40,40,.07) 0%,transparent 70%);pointer-events:none}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.about-img{position:relative;border-radius:var(--radius);overflow:hidden}
+.about-img img{width:100%;height:420px;object-fit:cover;border-radius:var(--radius);transition:transform .6s}
+.about-img:hover img{transform:scale(1.04)}
+.about-img::after{content:'';position:absolute;inset:0;border-radius:var(--radius);border:1px solid rgba(247,183,49,.2)}
+.about-badge{position:absolute;bottom:20px;right:20px;background:var(--red);color:#fff;font-family:var(--font-head);font-size:1.4rem;padding:14px 18px;border-radius:14px;text-align:center;line-height:1.2;box-shadow:0 8px 30px rgba(214,40,40,.5)}
+.about-features{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:28px}
+.about-feat{display:flex;align-items:center;gap:10px;font-size:.9rem;color:var(--muted)}
+.about-feat i{color:var(--yellow);font-size:.9rem}
+
+/* ─── MENU ──────────────────────────────────────────────────── */
+#menu{background:var(--dark);position:relative}
+.menu-filter{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:40px}
+.filter-btn{padding:9px 24px;border-radius:50px;border:1px solid rgba(255,255,255,.12);background:transparent;color:var(--muted);font-family:var(--font-body);font-weight:700;font-size:.85rem;cursor:pointer;transition:all .3s;letter-spacing:.5px;text-transform:uppercase}
+.filter-btn.active,.filter-btn:hover{background:var(--red);border-color:var(--red);color:#fff;box-shadow:0 4px 20px rgba(214,40,40,.35)}
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:24px}
+.menu-card{border-radius:var(--radius);overflow:hidden;transition:transform .35s,box-shadow .35s;animation:cardIn .5s ease both}
+@keyframes cardIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.menu-card:hover{transform:translateY(-8px);box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.menu-card-img{position:relative;height:200px;overflow:hidden}
+.menu-card-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.menu-card:hover .menu-card-img img{transform:scale(1.08)}
+.menu-badge{position:absolute;top:12px;left:12px;background:var(--red);color:#fff;font-family:var(--font-head);font-size:.7rem;padding:3px 12px;border-radius:40px;letter-spacing:1px}
+.menu-card-body{padding:20px;background:var(--dark3)}
+.menu-card-body h3{font-family:var(--font-head);font-size:1.4rem;letter-spacing:.5px;margin-bottom:4px}
+.menu-card-body p{font-size:.82rem;color:var(--muted);margin-bottom:16px}
+.menu-card-foot{display:flex;align-items:center;justify-content:space-between}
+.price{font-family:var(--font-head);font-size:1.5rem;color:var(--yellow)}
+.price span{font-size:.75rem;font-family:var(--font-body);color:var(--muted)}
+.order-btn{background:var(--red);color:#fff;border:none;padding:9px 18px;border-radius:50px;font-family:var(--font-body);font-weight:700;font-size:.82rem;cursor:pointer;transition:all .3s;display:flex;align-items:center;gap:6px}
+.order-btn:hover{background:var(--red2);box-shadow:0 4px 20px rgba(214,40,40,.4);transform:scale(1.04)}
+.menu-card.hidden{display:none}
+
+/* ─── SERVICES ──────────────────────────────────────────────── */
+#services{background:var(--dark2)}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.service-card{border-radius:var(--radius);padding:40px 30px;text-align:center;transition:transform .35s,box-shadow .35s;position:relative;overflow:hidden}
+.service-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(214,40,40,.08),rgba(247,183,49,.05));opacity:0;transition:opacity .4s}
+.service-card:hover::before{opacity:1}
+.service-card:hover{transform:translateY(-10px);box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.service-icon{width:72px;height:72px;background:rgba(214,40,40,.15);border-radius:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:2rem;transition:background .3s}
+.service-card:hover .service-icon{background:var(--red)}
+.service-card h3{font-family:var(--font-head);font-size:1.6rem;margin-bottom:8px}
+.service-card p{font-size:.9rem;color:var(--muted);line-height:1.7}
+
+/* ─── REVIEWS ───────────────────────────────────────────────── */
+#reviews{background:var(--dark);position:relative;overflow:hidden}
+#reviews::before{content:'';position:absolute;left:-150px;bottom:-150px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(247,183,49,.06) 0%,transparent 70%);pointer-events:none}
+.reviews-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:40px;flex-wrap:wrap;gap:20px}
+.rating-big{display:flex;align-items:center;gap:16px}
+.rating-number{font-family:var(--font-head);font-size:5rem;color:var(--yellow);line-height:1}
+.rating-info .stars{color:var(--yellow);font-size:1.1rem;letter-spacing:2px}
+.rating-info p{color:var(--muted);font-size:.85rem;margin-top:4px}
+.reviews-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+.review-card{border-radius:var(--radius);padding:24px;transition:transform .3s;position:relative}
+.review-card:hover{transform:translateY(-5px)}
+.review-card::before{content:'❝';position:absolute;top:12px;right:18px;font-size:3rem;color:rgba(247,183,49,.12);font-family:Georgia,serif;line-height:1}
+.reviewer{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.reviewer-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--red),var(--yellow));display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:1.2rem;color:#fff;flex-shrink:0}
+.reviewer-name{font-weight:700;font-size:.95rem}
+.reviewer-date{font-size:.75rem;color:var(--muted)}
+.review-stars{color:var(--yellow);font-size:.85rem;margin-bottom:10px;letter-spacing:2px}
+.review-card p{font-size:.9rem;color:rgba(240,237,232,.75);line-height:1.7;font-style:italic}
+
+/* ─── GALLERY ───────────────────────────────────────────────── */
+#gallery{background:var(--dark2)}
+.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:220px 220px;gap:16px}
+.gallery-item{border-radius:var(--radius);overflow:hidden;position:relative;cursor:pointer}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.gallery-item:hover img{transform:scale(1.08)}
+.gallery-item::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.6),transparent);opacity:0;transition:opacity .3s}
+.gallery-item:hover::after{opacity:1}
+.gallery-item:nth-child(1){grid-column:span 2}
+.gallery-item:nth-child(4){grid-column:span 2}
+.gallery-overlay{position:absolute;bottom:16px;left:16px;z-index:1;font-family:var(--font-head);font-size:1.2rem;color:#fff;opacity:0;transform:translateY(10px);transition:all .3s}
+.gallery-item:hover .gallery-overlay{opacity:1;transform:translateY(0)}
+
+/* ─── CONTACT ───────────────────────────────────────────────── */
+#contact{background:var(--dark)}
+.contact-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:50px;align-items:start}
+.contact-info-item{display:flex;align-items:flex-start;gap:16px;margin-bottom:28px}
+.contact-icon{width:50px;height:50px;background:rgba(214,40,40,.15);border-radius:14px;display:flex;align-items:center;justify-content:center;color:var(--red);font-size:1.1rem;flex-shrink:0;margin-top:2px}
+.contact-info-item h4{font-family:var(--font-head);font-size:1.1rem;margin-bottom:2px}
+.contact-info-item p,.contact-info-item a{color:var(--muted);font-size:.9rem;transition:color .3s}
+.contact-info-item a:hover{color:var(--yellow)}
+.hours-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:20px}
+.hours-item{display:flex;justify-content:space-between;padding:10px 14px;border-radius:10px;background:rgba(255,255,255,.03);font-size:.85rem}
+.hours-item span:last-child{color:var(--yellow);font-weight:600}
+.map-embed{border-radius:var(--radius);overflow:hidden;height:260px;border:1px solid rgba(255,255,255,.07);margin-top:24px}
+.map-embed iframe{width:100%;height:100%;border:0;filter:grayscale(80%) invert(1) hue-rotate(180deg) brightness(.8)}
+
+/* ─── ORDER FORM ────────────────────────────────────────────── */
+#order{background:var(--dark2)}
+.order-wrapper{max-width:700px;margin:0 auto}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.form-group{display:flex;flex-direction:column;gap:8px}
+.form-group.full{grid-column:1/-1}
+.form-group label{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted)}
+.form-group input,.form-group textarea,.form-group select{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:13px 16px;color:var(--text);font-family:var(--font-body);font-size:.95rem;transition:border-color .3s,background .3s;outline:none;width:100%}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--red);background:rgba(255,255,255,.07)}
+.form-group textarea{resize:vertical;min-height:110px}
+.form-group select option{background:var(--dark3);color:var(--text)}
+.form-submit{margin-top:8px;width:100%}
+.success-msg{display:none;background:rgba(39,174,96,.15);border:1px solid rgba(39,174,96,.3);border-radius:12px;padding:16px;color:#27ae60;text-align:center;margin-top:16px;font-weight:600}
+
+/* ─── FOOTER ────────────────────────────────────────────────── */
+footer{background:#080808;padding:50px 24px 24px;border-top:1px solid rgba(255,255,255,.05)}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+.footer-brand .logo{font-size:2rem;margin-bottom:12px}
+.footer-brand p{font-size:.875rem;color:var(--muted);line-height:1.7;max-width:260px}
+.footer-social{display:flex;gap:12px;margin-top:20px}
+.social-btn{width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;color:var(--muted);transition:all .3s;font-size:.9rem}
+.social-btn:hover{background:var(--red);color:#fff;transform:translateY(-3px)}
+.footer-col h4{font-family:var(--font-head);font-size:1.1rem;margin-bottom:16px;letter-spacing:.5px}
+.footer-col ul li{margin-bottom:10px}
+.footer-col ul li a{color:var(--muted);font-size:.875rem;transition:color .3s}
+.footer-col ul li a:hover{color:var(--yellow)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.06);padding-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:gap;gap:12px}
+.footer-bottom p{font-size:.8rem;color:var(--muted)}
+
+/* ─── FLOATING BUTTONS ──────────────────────────────────────── */
+.floating-btns{position:fixed;bottom:28px;right:24px;display:flex;flex-direction:column;gap:12px;z-index:900}
+.fab{width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;cursor:pointer;box-shadow:0 6px 24px rgba(0,0,0,.4);transition:transform .3s,box-shadow .3s;text-decoration:none;border:none;animation:fabIn .6s ease both}
+@keyframes fabIn{from{opacity:0;transform:scale(0)}to{opacity:1;transform:scale(1)}}
+.fab-wa{background:#25D366;color:#fff;animation-delay:.2s}
+.fab-wa:hover{transform:scale(1.15) translateY(-3px);box-shadow:0 12px 32px rgba(37,211,102,.45)}
+.fab-top{background:var(--red);color:#fff;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s,box-shadow .3s;animation-delay:.3s}
+.fab-top.visible{opacity:1;pointer-events:auto}
+.fab-top:hover{transform:scale(1.15) translateY(-3px);box-shadow:0 12px 32px rgba(214,40,40,.45)}
+
+/* ─── CART DRAWER ───────────────────────────────────────────── */
+.cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);z-index:1999;opacity:0;pointer-events:none;transition:opacity .35s}
+.cart-overlay.open{opacity:1;pointer-events:auto}
+.cart-drawer{position:fixed;top:0;right:0;bottom:0;width:420px;max-width:100vw;background:var(--dark2);border-left:1px solid rgba(255,255,255,.08);z-index:2000;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .38s cubic-bezier(.4,0,.2,1)}
+.cart-drawer.open{transform:translateX(0)}
+.cart-head{display:flex;align-items:center;justify-content:space-between;padding:22px 24px;border-bottom:1px solid rgba(255,255,255,.07)}
+.cart-head h2{font-family:var(--font-head);font-size:1.6rem;letter-spacing:1px}
+.cart-head h2 span{color:var(--yellow)}
+.cart-close{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.07);border:none;color:var(--text);font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.cart-close:hover{background:var(--red)}
+.cart-body{flex:1;overflow-y:auto;padding:20px 24px}
+.cart-body::-webkit-scrollbar{width:4px}
+.cart-body::-webkit-scrollbar-track{background:transparent}
+.cart-body::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:4px}
+.cart-empty{text-align:center;padding:60px 20px;color:var(--muted)}
+.cart-empty i{font-size:3.5rem;color:rgba(255,255,255,.1);display:block;margin-bottom:16px}
+.cart-empty p{font-size:1rem}
+.cart-item{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.05);animation:slideIn .3s ease}
+@keyframes slideIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
+.cart-item-img{width:60px;height:60px;border-radius:12px;object-fit:cover;flex-shrink:0}
+.cart-item-info{flex:1;min-width:0}
+.cart-item-name{font-family:var(--font-head);font-size:1.1rem;letter-spacing:.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cart-item-price{font-size:.85rem;color:var(--yellow);font-weight:700}
+.cart-item-controls{display:flex;align-items:center;gap:8px;margin-top:6px}
+.qty-btn{width:28px;height:28px;border-radius:8px;border:1px solid rgba(255,255,255,.15);background:transparent;color:var(--text);font-size:.9rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;line-height:1}
+.qty-btn:hover{background:var(--red);border-color:var(--red)}
+.qty-num{font-family:var(--font-head);font-size:1rem;min-width:20px;text-align:center}
+.cart-item-del{width:30px;height:30px;border-radius:8px;border:none;background:rgba(214,40,40,.12);color:var(--red);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;font-size:.8rem;flex-shrink:0}
+.cart-item-del:hover{background:var(--red);color:#fff}
+.cart-foot{border-top:1px solid rgba(255,255,255,.07);padding:20px 24px}
+.cart-summary{margin-bottom:16px}
+.cart-row{display:flex;justify-content:space-between;align-items:center;font-size:.9rem;color:var(--muted);margin-bottom:8px}
+.cart-row.total{font-family:var(--font-head);font-size:1.4rem;color:#fff;margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.08)}
+.cart-row.total span:last-child{color:var(--yellow)}
+.cart-checkout-btn{width:100%;padding:15px;border-radius:50px;background:var(--red);color:#fff;border:none;font-family:var(--font-head);font-size:1.1rem;letter-spacing:1.5px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:all .3s;margin-bottom:10px}
+.cart-checkout-btn:hover{background:var(--red2);box-shadow:0 8px 30px rgba(214,40,40,.45);transform:translateY(-1px)}
+.cart-checkout-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.cart-clear-btn{width:100%;padding:11px;border-radius:50px;background:transparent;color:var(--muted);border:1px solid rgba(255,255,255,.1);font-family:var(--font-body);font-size:.85rem;cursor:pointer;transition:all .2s;letter-spacing:.5px}
+.cart-clear-btn:hover{border-color:var(--red);color:var(--red)}
+/* Cart fab */
+.fab-cart{background:var(--yellow);color:#000;position:relative;animation-delay:.1s}
+.fab-cart:hover{background:#ffd000;transform:scale(1.15) translateY(-3px);box-shadow:0 12px 32px rgba(247,183,49,.45)}
+.cart-badge{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;width:20px;height:20px;border-radius:50%;font-size:.65rem;font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid var(--dark);display:none}
+.cart-badge.show{display:flex}
+/* Add btn state */
+.order-btn.added{background:var(--yellow) !important;color:#000 !important}
+/* Checkout modal */
+.checkout-modal{position:fixed;inset:0;z-index:3000;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .3s}
+.checkout-modal.open{opacity:1;pointer-events:auto}
+.checkout-modal-bg{position:absolute;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(8px)}
+.checkout-box{position:relative;z-index:1;background:var(--dark3);border:1px solid rgba(255,255,255,.1);border-radius:24px;padding:36px;width:100%;max-width:500px;max-height:90vh;overflow-y:auto;animation:modalIn .35s ease}
+@keyframes modalIn{from{opacity:0;transform:scale(.95) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.checkout-box h2{font-family:var(--font-head);font-size:2rem;margin-bottom:4px}
+.checkout-box h2 span{color:var(--yellow)}
+.checkout-box > p{color:var(--muted);font-size:.9rem;margin-bottom:24px}
+.checkout-order-summary{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:16px;margin-bottom:22px;max-height:160px;overflow-y:auto}
+.checkout-order-summary::-webkit-scrollbar{width:3px}
+.checkout-order-summary::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:4px}
+.co-item{display:flex;justify-content:space-between;font-size:.88rem;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.05);color:var(--muted)}
+.co-item:last-child{border-bottom:none}
+.co-item span:last-child{color:var(--yellow);font-weight:700}
+.co-total{display:flex;justify-content:space-between;font-family:var(--font-head);font-size:1.3rem;margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,.08)}
+.co-total span:last-child{color:var(--yellow)}
+.checkout-form .form-group{margin-bottom:14px}
+.checkout-actions{display:flex;gap:12px;margin-top:20px}
+.checkout-actions .btn{flex:1;justify-content:center}
+
+/* ─── RESPONSIVE ────────────────────────────────────────────── */
+@media(max-width:1024px){
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .gallery-grid{grid-template-columns:repeat(2,1fr);grid-template-rows:auto}
+  .gallery-item:nth-child(1),.gallery-item:nth-child(4){grid-column:span 1}
+}
+@media(max-width:768px){
+  section{padding:60px 20px}
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .about-grid,.contact-grid{grid-template-columns:1fr}
+  .services-grid{grid-template-columns:1fr}
+  .form-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column;text-align:center}
+  .hero-stats{gap:20px}
+  .gallery-grid{grid-template-columns:1fr 1fr;gap:10px}
+}
+@media(max-width:480px){
+  .gallery-grid{grid-template-columns:1fr}
+  .gallery-item:nth-child(1),.gallery-item:nth-child(4){grid-column:span 1}
+  .menu-grid{grid-template-columns:1fr}
+  .reviews-header{flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+
+<!-- ─── NAVBAR ─────────────────────────────────────────────── -->
+<nav id="navbar">
+  <a href="#" class="logo">MUNCH <span>FAST FOOD</span></a>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#menu">Menu</a>
+    <a href="#services">Services</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#contact">Contact</a>
+    <a href="#order" class="btn btn-red">Order Now</a>
+  </div>
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="closeMenu()">About</a>
+  <a href="#menu" onclick="closeMenu()">Menu</a>
+  <a href="#services" onclick="closeMenu()">Services</a>
+  <a href="#reviews" onclick="closeMenu()">Reviews</a>
+  <a href="#gallery" onclick="closeMenu()">Gallery</a>
+  <a href="#contact" onclick="closeMenu()">Contact</a>
+  <a href="#order" onclick="closeMenu()" style="color:var(--yellow)">Order Now →</a>
+</div>
+
+<!-- ─── HERO ───────────────────────────────────────────────── -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-badge"><i class="fa fa-star" style="color:var(--yellow)"></i> Kohat's #1 Fast Food</div>
+    <h1 class="hero-title">Welcome to <span>Munch</span> <em>Fast Food</em></h1>
+    <p class="hero-sub">Delicious Burgers, Pizza &amp; Fries — right here in Kohat, served hot and fresh every day till midnight.</p>
+    <div class="hero-btns">
+      <a href="#menu" class="btn btn-yellow"><i class="fa fa-utensils"></i> View Menu</a>
+      <a href="#order" class="btn btn-outline"><i class="fa fa-shopping-bag"></i> Order Now</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">4.2⭐</div><div class="stat-label">Rating</div></div>
+      <div class="stat"><div class="stat-num">120+</div><div class="stat-label">Reviews</div></div>
+      <div class="stat"><div class="stat-num">12AM</div><div class="stat-label">Closes At</div></div>
+      <div class="stat"><div class="stat-num">3</div><div class="stat-label">Services</div></div>
+    </div>
+  </div>
+  <div class="hero-scroll"><span></span></div>
+</section>
+
+<!-- ─── MENU ───────────────────────────────────────────────── -->
+<section id="menu">
+  <div class="container">
+    <div class="tag">Our Menu</div>
+    <h2 class="section-title">Fresh &amp; <span>Flavourful</span></h2>
+    <p class="section-sub">From juicy burgers to crispy pizzas — every bite is crafted with love. Add Meal + Fries + Drink @ Rs. 199/-</p>
+    <div class="menu-filter">
+      <button class="filter-btn active" data-cat="all">All Items</button>
+      <button class="filter-btn" data-cat="burger">Burgers</button>
+      <button class="filter-btn" data-cat="pizza">Pizza</button>
+      <button class="filter-btn" data-cat="mfc">MFC</button>
+      <button class="filter-btn" data-cat="fries">Fries &amp; Rolls</button>
+      <button class="filter-btn" data-cat="rice">Rice</button>
+      <button class="filter-btn" data-cat="deals">Deals</button>
+      <button class="filter-btn" data-cat="drinks">Drinks</button>
+    </div>
+    <div class="menu-grid" id="menuGrid">
+
+      <!-- ══ BURGERS ══ -->
+      <div class="menu-card glass" data-cat="burger">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&q=80" alt="Zinger Burger" loading="lazy"><div class="menu-badge">🔥 Best Seller</div></div>
+        <div class="menu-card-body"><h3>Zinger Burger</h3><p>Crispy fried chicken fillet, fresh lettuce, mayo sauce in a toasted bun.</p>
+          <div class="menu-card-foot"><div class="price">Rs 380</div><button class="order-btn" onclick="addToCart('Zinger Burger',380,'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="burger">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1550547660-d9450f859349?w=600&q=80" alt="Tower Burger" loading="lazy"><div class="menu-badge">🍔 Stacked</div></div>
+        <div class="menu-card-body"><h3>Tower Burger</h3><p>Double-stacked chicken patties with fresh veggies and Munch special sauce.</p>
+          <div class="menu-card-foot"><div class="price">Rs 500</div><button class="order-btn" onclick="addToCart('Tower Burger',500,'https://images.unsplash.com/photo-1550547660-d9450f859349?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="burger">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=600&q=80" alt="London Cheese Burger" loading="lazy"><div class="menu-badge">🧀 Cheesy</div></div>
+        <div class="menu-card-body"><h3>London Cheese Burger</h3><p>Classic style burger with melted cheese, pickles, mustard and beef patty.</p>
+          <div class="menu-card-foot"><div class="price">Rs 280</div><button class="order-btn" onclick="addToCart('London Cheese Burger',280,'https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="burger">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=600&q=80" alt="Bouncer Burger" loading="lazy"><div class="menu-badge">💪 Premium</div></div>
+        <div class="menu-card-body"><h3>Bouncer Burger</h3><p>Hearty premium burger loaded with double patty, fresh veggies and special sauce.</p>
+          <div class="menu-card-foot"><div class="price">Rs 600</div><button class="order-btn" onclick="addToCart('Bouncer Burger',600,'https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="burger">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?w=600&q=80" alt="Tender Burger" loading="lazy"><div class="menu-badge">🍗 Tender</div></div>
+        <div class="menu-card-body"><h3>Tender Burger</h3><p>Juicy tender chicken strip, crispy coating, served with fresh slaw in a soft bun.</p>
+          <div class="menu-card-foot"><div class="price">Rs 380</div><button class="order-btn" onclick="addToCart('Tender Burger',380,'https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="burger">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=600&q=80" alt="Tikka Burger" loading="lazy"><div class="menu-badge">🌶️ Spicy</div></div>
+        <div class="menu-card-body"><h3>Tikka Burger</h3><p>Desi tikka spiced chicken patty with chutney, onions and fresh salad.</p>
+          <div class="menu-card-foot"><div class="price">Rs 280</div><button class="order-btn" onclick="addToCart('Tikka Burger',280,'https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="burger">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=600&q=80" alt="Max Burger" loading="lazy"><div class="menu-badge">🔝 Max</div></div>
+        <div class="menu-card-body"><h3>Max Burger</h3><p>The biggest, boldest burger with jumbo chicken patty and all the toppings.</p>
+          <div class="menu-card-foot"><div class="price">Rs 350</div><button class="order-btn" onclick="addToCart('Max Burger',350,'https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="burger">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1608039829572-78524f79c4c7?w=600&q=80" alt="Fish Burger" loading="lazy"><div class="menu-badge">🐟 Fish</div></div>
+        <div class="menu-card-body"><h3>Fish Burger</h3><p>Crispy battered fish fillet, tartar sauce, fresh lettuce in a toasted bun.</p>
+          <div class="menu-card-foot"><div class="price">Rs 400</div><button class="order-btn" onclick="addToCart('Fish Burger',400,'https://images.unsplash.com/photo-1608039829572-78524f79c4c7?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="burger">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1561758033-d89a9ad46330?w=600&q=80" alt="Grilled Cheese Burger" loading="lazy"><div class="menu-badge">🧀 Grilled</div></div>
+        <div class="menu-card-body"><h3>Grilled Cheese Burger</h3><p>Flame-grilled patty with triple cheese, caramelised onions and smoky sauce.</p>
+          <div class="menu-card-foot"><div class="price">Rs 380</div><button class="order-btn" onclick="addToCart('Grilled Cheese Burger',380,'https://images.unsplash.com/photo-1561758033-d89a9ad46330?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="burger">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1615361200141-f45040f367be?w=600&q=80" alt="Munch Special Burger" loading="lazy"><div class="menu-badge">⭐ Special</div></div>
+        <div class="menu-card-body"><h3>Munch Special Burger</h3><p>Our signature creation — loaded with premium toppings and Munch's secret sauce.</p>
+          <div class="menu-card-foot"><div class="price">Rs 500</div><button class="order-btn" onclick="addToCart('Munch Special Burger',500,'https://images.unsplash.com/photo-1615361200141-f45040f367be?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="burger">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1602728674510-e5f78ae18fc4?w=600&q=80" alt="Double Chicken Burger" loading="lazy"><div class="menu-badge">🍗🍗 Double</div></div>
+        <div class="menu-card-body"><h3>Double Chicken Burger</h3><p>Two crispy chicken fillets stacked high with extra sauce, lettuce and tomato.</p>
+          <div class="menu-card-foot"><div class="price">Rs 350</div><button class="order-btn" onclick="addToCart('Double Chicken Burger',350,'https://images.unsplash.com/photo-1602728674510-e5f78ae18fc4?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="burger">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1585238342024-78d387f4a707?w=600&q=80" alt="Double Tikka Burger" loading="lazy"><div class="menu-badge">🌶️🌶️ Double Spicy</div></div>
+        <div class="menu-card-body"><h3>Double Tikka Burger</h3><p>Two tikka spiced patties with green chutney, fresh onion rings and sauces.</p>
+          <div class="menu-card-foot"><div class="price">Rs 380</div><button class="order-btn" onclick="addToCart('Double Tikka Burger',380,'https://images.unsplash.com/photo-1585238342024-78d387f4a707?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <!-- ══ PIZZA ══ -->
+      <div class="menu-card glass" data-cat="pizza">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?w=600&q=80" alt="Bar BQ Pizza" loading="lazy"><div class="menu-badge">🍖 BBQ</div></div>
+        <div class="menu-card-body"><h3>Bar BQ Pizza</h3><p>Smoky BBQ sauce, chicken, peppers and mozzarella on a hand-tossed base.</p>
+          <div class="menu-card-foot"><div class="price">Rs 700 <span>S</span></div><button class="order-btn" onclick="addToCart('Bar BQ Pizza (S)',700,'https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="pizza">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&q=80" alt="Chicken Tikka Pizza" loading="lazy"><div class="menu-badge">🌶️ Spicy</div></div>
+        <div class="menu-card-body"><h3>Chicken Tikka Pizza</h3><p>Marinated tikka chicken, green chilli, red onion and mozzarella on desi base.</p>
+          <div class="menu-card-foot"><div class="price">Rs 700 <span>S</span></div><button class="order-btn" onclick="addToCart('Chicken Tikka Pizza (S)',700,'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="pizza">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=600&q=80" alt="Chicken Fejita Pizza" loading="lazy"><div class="menu-badge">🫑 Fajita</div></div>
+        <div class="menu-card-body"><h3>Chicken Fejita Pizza</h3><p>Seasoned fajita chicken, peppers, onions and mozzarella cheese.</p>
+          <div class="menu-card-foot"><div class="price">Rs 700 <span>S</span></div><button class="order-btn" onclick="addToCart('Chicken Fejita Pizza (S)',700,'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="pizza">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?w=600&q=80" alt="Two in One Pizza" loading="lazy"><div class="menu-badge">🍕 Duo</div></div>
+        <div class="menu-card-body"><h3>Two in One Pizza</h3><p>Two flavours on one pizza — the best of both worlds in every slice.</p>
+          <div class="menu-card-foot"><div class="price">Rs 700 <span>S</span></div><button class="order-btn" onclick="addToCart('Two in One Pizza (S)',700,'https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="pizza">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="Super Supreme Pizza" loading="lazy"><div class="menu-badge">👑 Supreme</div></div>
+        <div class="menu-card-body"><h3>Super Supreme Pizza</h3><p>Loaded with all premium toppings — the ultimate pizza experience.</p>
+          <div class="menu-card-foot"><div class="price">Rs 700 <span>S</span></div><button class="order-btn" onclick="addToCart('Super Supreme Pizza (S)',700,'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="pizza">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?w=600&q=80" alt="Hot & Spicy Pizza" loading="lazy"><div class="menu-badge">🔥 Hot</div></div>
+        <div class="menu-card-body"><h3>Hot &amp; Spicy Pizza</h3><p>Fiery spiced chicken, jalapeños and chilli flakes on a flavour-packed base.</p>
+          <div class="menu-card-foot"><div class="price">Rs 700 <span>S</span></div><button class="order-btn" onclick="addToCart('Hot & Spicy Pizza (S)',700,'https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="pizza">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=600&q=80" alt="Vegetarian Pizza" loading="lazy"><div class="menu-badge">🥦 Veggie</div></div>
+        <div class="menu-card-body"><h3>Vegetarian Pizza</h3><p>Fresh garden veggies, mushrooms, olives and mozzarella on tomato base.</p>
+          <div class="menu-card-foot"><div class="price">Rs 550 <span>S</span></div><button class="order-btn" onclick="addToCart('Vegetarian Pizza (S)',550,'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="pizza">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1628840042765-356cda07504e?w=600&q=80" alt="Cheese Gold Pizza" loading="lazy"><div class="menu-badge">🧀 Gold</div></div>
+        <div class="menu-card-body"><h3>Cheese Gold Pizza</h3><p>Overloaded with four-cheese blend — a cheese lover's dream pizza.</p>
+          <div class="menu-card-foot"><div class="price">Rs 600 <span>S</span></div><button class="order-btn" onclick="addToCart('Cheese Gold Pizza (S)',600,'https://images.unsplash.com/photo-1628840042765-356cda07504e?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="pizza">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&q=80" alt="Munch Special Pizza" loading="lazy"><div class="menu-badge">⭐ Signature</div></div>
+        <div class="menu-card-body"><h3>Munch Special Pizza</h3><p>Our chef's signature pizza with exclusive toppings and secret sauce blend.</p>
+          <div class="menu-card-foot"><div class="price">Rs 850 <span>S</span></div><button class="order-btn" onclick="addToCart('Munch Special Pizza (S)',850,'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="pizza">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1571066811602-716837d681de?w=600&q=80" alt="Four Season Pizza" loading="lazy"><div class="menu-badge">🍂 Four Season</div></div>
+        <div class="menu-card-body"><h3>Four Season Pizza</h3><p>Four distinct flavour quarters celebrating all the seasons in one pizza.</p>
+          <div class="menu-card-foot"><div class="price">Rs 800 <span>S</span></div><button class="order-btn" onclick="addToCart('Four Season Pizza (S)',800,'https://images.unsplash.com/photo-1571066811602-716837d681de?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="pizza">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1559181567-c3190e918be0?w=600&q=80" alt="Fish Pizza" loading="lazy"><div class="menu-badge">🐟 Fish</div></div>
+        <div class="menu-card-body"><h3>Fish Pizza</h3><p>Crispy fish pieces with tangy sauce, onions and cheese on a fresh base.</p>
+          <div class="menu-card-foot"><div class="price">Rs 800 <span>S</span></div><button class="order-btn" onclick="addToCart('Fish Pizza (S)',800,'https://images.unsplash.com/photo-1559181567-c3190e918be0?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="pizza">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=600&q=80" alt="Stuff Crust Pizza" loading="lazy"><div class="menu-badge">🧀 Stuffed</div></div>
+        <div class="menu-card-body"><h3>Stuff Crust Pizza</h3><p>Cheesy stuffed crust packed with extra mozzarella running all the way to the edge.</p>
+          <div class="menu-card-foot"><div class="price">Rs 900 <span>S</span></div><button class="order-btn" onclick="addToCart('Stuff Crust Pizza (S)',900,'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="pizza">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1548369937-47519962c11a?w=600&q=80" alt="Lazania Pizza" loading="lazy"><div class="menu-badge">🍝 Fusion</div></div>
+        <div class="menu-card-body"><h3>Lazania Pizza</h3><p>A fusion of lasagna flavours on a pizza base — creamy, meaty and irresistible.</p>
+          <div class="menu-card-foot"><div class="price">Rs 1600 <span>M</span></div><button class="order-btn" onclick="addToCart('Lazania Pizza (M)',1600,'https://images.unsplash.com/photo-1548369937-47519962c11a?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="pizza">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=600&q=80" alt="Crown Crust Pizza" loading="lazy"><div class="menu-badge">👑 Crown</div></div>
+        <div class="menu-card-body"><h3>Crown Crust Pizza</h3><p>Regal crown-shaped crust filled with cheese and premium toppings.</p>
+          <div class="menu-card-foot"><div class="price">Rs 1250 <span>M</span></div><button class="order-btn" onclick="addToCart('Crown Crust Pizza (M)',1250,'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="pizza">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1595854341625-f33ee10dbf9f?w=600&q=80" alt="Calazone 2 in 1" loading="lazy"><div class="menu-badge">🫙 Calzone</div></div>
+        <div class="menu-card-body"><h3>Calazone 2 in 1</h3><p>Folded calzone pocket filled with two flavours of cheesy goodness inside.</p>
+          <div class="menu-card-foot"><div class="price">Rs 900 <span>S</span></div><button class="order-btn" onclick="addToCart('Calazone 2 in 1 (S)',900,'https://images.unsplash.com/photo-1595854341625-f33ee10dbf9f?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="pizza">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1630384060421-cb20d0e0649d?w=600&q=80" alt="Bihari Kabab Pizza" loading="lazy"><div class="menu-badge">🍢 Kabab</div></div>
+        <div class="menu-card-body"><h3>Bihari Kabab Pizza</h3><p>Tender Bihari kabab pieces on pizza with onions, peppers and desi spices.</p>
+          <div class="menu-card-foot"><div class="price">Rs 800 <span>S</span></div><button class="order-btn" onclick="addToCart('Bihari Kabab Pizza (S)',800,'https://images.unsplash.com/photo-1630384060421-cb20d0e0649d?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="pizza">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1552539618-7eec9b4d1796?w=600&q=80" alt="Afghani Pizza" loading="lazy"><div class="menu-badge">🇦🇫 Afghani</div></div>
+        <div class="menu-card-body"><h3>Afghani Pizza</h3><p>Afghani spiced chicken with yoghurt base, coriander and special Afghani sauce.</p>
+          <div class="menu-card-foot"><div class="price">Rs 800 <span>S</span></div><button class="order-btn" onclick="addToCart('Afghani Pizza (S)',800,'https://images.unsplash.com/photo-1552539618-7eec9b4d1796?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <!-- ══ MFC ══ -->
+      <div class="menu-card glass" data-cat="mfc">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1569058242253-92a9c755a0ec?w=600&q=80" alt="20 Pcs Chicken Strips" loading="lazy"><div class="menu-badge">🍗 Party Pack</div></div>
+        <div class="menu-card-body"><h3>20 Pcs Chicken Strips</h3><p>20 golden crispy chicken strips — perfect for sharing with the whole crew.</p>
+          <div class="menu-card-foot"><div class="price">Rs 1180</div><button class="order-btn" onclick="addToCart('20 Pcs Chicken Strips',1180,'https://images.unsplash.com/photo-1569058242253-92a9c755a0ec?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="mfc">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1527477396000-e27163b481c2?w=600&q=80" alt="20 Pcs Hot Wings" loading="lazy"><div class="menu-badge">🔥 Hot Pack</div></div>
+        <div class="menu-card-body"><h3>20 Pcs Hot Wings</h3><p>20 fiery hot wings tossed in our signature hot sauce. Dare to finish them all!</p>
+          <div class="menu-card-foot"><div class="price">Rs 1200</div><button class="order-btn" onclick="addToCart('20 Pcs Hot Wings',1200,'https://images.unsplash.com/photo-1527477396000-e27163b481c2?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="mfc">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1603565816030-6b389eeb23cb?w=600&q=80" alt="10 Strips" loading="lazy"><div class="menu-badge">🍗 10 Pcs</div></div>
+        <div class="menu-card-body"><h3>10 Strips</h3><p>10 crispy chicken strips, golden fried and served with dipping sauce.</p>
+          <div class="menu-card-foot"><div class="price">Rs 600</div><button class="order-btn" onclick="addToCart('10 Strips',600,'https://images.unsplash.com/photo-1603565816030-6b389eeb23cb?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="mfc">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1626082927389-6cd097cee6be?w=600&q=80" alt="10 Pcs Hot Wings" loading="lazy"><div class="menu-badge">🌶️ Wings</div></div>
+        <div class="menu-card-body"><h3>10 Pcs Hot Wings</h3><p>Ten sizzling hot wings coated in Munch's special spicy sauce.</p>
+          <div class="menu-card-foot"><div class="price">Rs 600</div><button class="order-btn" onclick="addToCart('10 Pcs Hot Wings',600,'https://images.unsplash.com/photo-1626082927389-6cd097cee6be?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="mfc">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1598182198871-d3f4ab4fd181?w=600&q=80" alt="5 Strips" loading="lazy"><div class="menu-badge">🍗 5 Pcs</div></div>
+        <div class="menu-card-body"><h3>5 Strips</h3><p>Five golden crispy chicken strips — a quick and satisfying snack.</p>
+          <div class="menu-card-foot"><div class="price">Rs 300</div><button class="order-btn" onclick="addToCart('5 Strips',300,'https://images.unsplash.com/photo-1598182198871-d3f4ab4fd181?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="mfc">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1527477396000-e27163b481c2?w=600&q=80" alt="5 Pcs Hot Wings" loading="lazy"><div class="menu-badge">🔥 5 Wings</div></div>
+        <div class="menu-card-body"><h3>5 Pcs Hot Wings</h3><p>Five spicy hot wings, perfectly crispy on the outside and juicy inside.</p>
+          <div class="menu-card-foot"><div class="price">Rs 300</div><button class="order-btn" onclick="addToCart('5 Pcs Hot Wings',300,'https://images.unsplash.com/photo-1527477396000-e27163b481c2?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="mfc">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1527477396000-e27163b481c2?w=600&q=80" alt="6 Pcs Grill Wings" loading="lazy"><div class="menu-badge">🔥 Grilled</div></div>
+        <div class="menu-card-body"><h3>6 Pcs Grill Wings</h3><p>Six chargrilled wings marinated in herbs and spices — smoky perfection.</p>
+          <div class="menu-card-foot"><div class="price">Rs 300</div><button class="order-btn" onclick="addToCart('6 Pcs Grill Wings',300,'https://images.unsplash.com/photo-1527477396000-e27163b481c2?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="mfc">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1527477396000-e27163b481c2?w=600&q=80" alt="12 Pcs Grill Wings" loading="lazy"><div class="menu-badge">🔥 12 Pack</div></div>
+        <div class="menu-card-body"><h3>12 Pcs Grill Wings</h3><p>A dozen grilled wings perfect for sharing — juicy, smoky and flavourful.</p>
+          <div class="menu-card-foot"><div class="price">Rs 600</div><button class="order-btn" onclick="addToCart('12 Pcs Grill Wings',600,'https://images.unsplash.com/photo-1527477396000-e27163b481c2?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="mfc">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1562802378-063ec186a863?w=600&q=80" alt="5 Nuggets" loading="lazy"><div class="menu-badge">🧡 Nuggets</div></div>
+        <div class="menu-card-body"><h3>5 Nuggets</h3><p>Five tender chicken nuggets, golden breaded, served with ketchup.</p>
+          <div class="menu-card-foot"><div class="price">Rs 200</div><button class="order-btn" onclick="addToCart('5 Nuggets',200,'https://images.unsplash.com/photo-1562802378-063ec186a863?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="mfc">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1562802378-063ec186a863?w=600&q=80" alt="10 Nuggets" loading="lazy"><div class="menu-badge">🧡 10 Pack</div></div>
+        <div class="menu-card-body"><h3>10 Nuggets</h3><p>Ten golden nuggets — great for sharing or going solo when you're extra hungry!</p>
+          <div class="menu-card-foot"><div class="price">Rs 380</div><button class="order-btn" onclick="addToCart('10 Nuggets',380,'https://images.unsplash.com/photo-1562802378-063ec186a863?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="mfc">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1569058242253-92a9c755a0ec?w=600&q=80" alt="10 Hot Shots" loading="lazy"><div class="menu-badge">💥 Hot Shots</div></div>
+        <div class="menu-card-body"><h3>10 Hot Shots</h3><p>Ten bite-sized hot chicken shots — explosive flavour in every piece.</p>
+          <div class="menu-card-foot"><div class="price">Rs 380</div><button class="order-btn" onclick="addToCart('10 Hot Shots',380,'https://images.unsplash.com/photo-1569058242253-92a9c755a0ec?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="mfc">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1598182198871-d3f4ab4fd181?w=600&q=80" alt="1 Chest Piece" loading="lazy"><div class="menu-badge">🍗 Piece</div></div>
+        <div class="menu-card-body"><h3>1 Chest Piece</h3><p>A juicy whole chicken chest piece, fried to golden crispy perfection.</p>
+          <div class="menu-card-foot"><div class="price">Rs 220</div><button class="order-btn" onclick="addToCart('1 Chest Piece',220,'https://images.unsplash.com/photo-1598182198871-d3f4ab4fd181?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="mfc">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1598182198871-d3f4ab4fd181?w=600&q=80" alt="1 Leg Piece" loading="lazy"><div class="menu-badge">🍗 Leg</div></div>
+        <div class="menu-card-body"><h3>1 Leg Piece</h3><p>Crispy golden fried chicken leg piece — juicy, tender and full of flavour.</p>
+          <div class="menu-card-foot"><div class="price">Rs 200</div><button class="order-btn" onclick="addToCart('1 Leg Piece',200,'https://images.unsplash.com/photo-1598182198871-d3f4ab4fd181?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="mfc">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1608039829572-78524f79c4c7?w=600&q=80" alt="10 Fish Strips" loading="lazy"><div class="menu-badge">🐟 Fish</div></div>
+        <div class="menu-card-body"><h3>10 Fish Strips</h3><p>Ten crispy battered fish strips served with a tangy dipping sauce.</p>
+          <div class="menu-card-foot"><div class="price">Rs 800</div><button class="order-btn" onclick="addToCart('10 Fish Strips',800,'https://images.unsplash.com/photo-1608039829572-78524f79c4c7?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="mfc">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=600&q=80" alt="500gm Fish" loading="lazy"><div class="menu-badge">🐠 Whole Fish</div></div>
+        <div class="menu-card-body"><h3>500gm Fish</h3><p>Half a kilo of freshly fried fish — seasoned and served with chutney.</p>
+          <div class="menu-card-foot"><div class="price">Rs 1500</div><button class="order-btn" onclick="addToCart('500gm Fish',1500,'https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <!-- ══ FRIES & ROLLS ══ -->
+      <div class="menu-card glass" data-cat="fries">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=600&q=80" alt="Regular Fries" loading="lazy"><div class="menu-badge">🍟 Classic</div></div>
+        <div class="menu-card-body"><h3>Regular Fries</h3><p>Golden crispy fries seasoned with Munch's secret spice blend.</p>
+          <div class="menu-card-foot"><div class="price">Rs 250</div><button class="order-btn" onclick="addToCart('Regular Fries',250,'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="fries">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=600&q=80" alt="Large Fries" loading="lazy"><div class="menu-badge">🍟 Large</div></div>
+        <div class="menu-card-body"><h3>Large Fries</h3><p>A bigger portion of our crispy golden fries to satisfy the hungriest of cravings.</p>
+          <div class="menu-card-foot"><div class="price">Rs 350</div><button class="order-btn" onclick="addToCart('Large Fries',350,'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="fries">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1518013431117-eb1465fa5752?w=600&q=80" alt="Garlic Fries" loading="lazy"><div class="menu-badge">🧄 Garlic</div></div>
+        <div class="menu-card-body"><h3>Garlic Fries</h3><p>Crispy fries tossed in roasted garlic butter and fresh herbs.</p>
+          <div class="menu-card-foot"><div class="price">Rs 400</div><button class="order-btn" onclick="addToCart('Garlic Fries',400,'https://images.unsplash.com/photo-1518013431117-eb1465fa5752?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="fries">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1630384060421-cb20d0e0649d?w=600&q=80" alt="Loaded Fries" loading="lazy"><div class="menu-badge">🔥 Loaded</div></div>
+        <div class="menu-card-body"><h3>Loaded Fries</h3><p>Fries piled high with cheese sauce, jalapeños and crispy chicken bits.</p>
+          <div class="menu-card-foot"><div class="price">Rs 500</div><button class="order-btn" onclick="addToCart('Loaded Fries',500,'https://images.unsplash.com/photo-1630384060421-cb20d0e0649d?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="fries">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&q=80" alt="Russian Salad" loading="lazy"><div class="menu-badge">🥗 Fresh</div></div>
+        <div class="menu-card-body"><h3>Russian Salad</h3><p>Classic creamy Russian salad with mixed vegetables — fresh and wholesome.</p>
+          <div class="menu-card-foot"><div class="price">Rs 200</div><button class="order-btn" onclick="addToCart('Russian Salad',200,'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="fries">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?w=600&q=80" alt="Munch Special Roll" loading="lazy"><div class="menu-badge">🌯 Special</div></div>
+        <div class="menu-card-body"><h3>Munch Special Roll</h3><p>Our signature roll stuffed with spiced chicken, fresh veggies and special sauce.</p>
+          <div class="menu-card-foot"><div class="price">Rs 350</div><button class="order-btn" onclick="addToCart('Munch Special Roll',350,'https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="fries">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?w=600&q=80" alt="Seekh Kabab Roll" loading="lazy"><div class="menu-badge">🍢 Kabab</div></div>
+        <div class="menu-card-body"><h3>Seekh Kabab Roll</h3><p>Juicy seekh kabab wrapped in a paratha with chutney and onion rings.</p>
+          <div class="menu-card-foot"><div class="price">Rs 250</div><button class="order-btn" onclick="addToCart('Seekh Kabab Roll',250,'https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="fries">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?w=600&q=80" alt="Zinger Shawarma" loading="lazy"><div class="menu-badge">🌯 Shawarma</div></div>
+        <div class="menu-card-body"><h3>Zinger Shawarma</h3><p>Crispy zinger chicken wrapped in flatbread with garlic sauce and pickles.</p>
+          <div class="menu-card-foot"><div class="price">Rs 250</div><button class="order-btn" onclick="addToCart('Zinger Shawarma',250,'https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="fries">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=600&q=80" alt="Sandwich" loading="lazy"><div class="menu-badge">🥪 Sandwich</div></div>
+        <div class="menu-card-body"><h3>Sandwich</h3><p>Fresh toasted sandwich with chicken or egg filling, veggies and creamy sauce.</p>
+          <div class="menu-card-foot"><div class="price">Rs 120</div><button class="order-btn" onclick="addToCart('Sandwich',120,'https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="fries">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600&q=80" alt="Lasagna Box Small" loading="lazy"><div class="menu-badge">🍝 Lasagna</div></div>
+        <div class="menu-card-body"><h3>Lasagna Box Small</h3><p>Classic baked lasagna layered with rich meat sauce and béchamel — comfort food.</p>
+          <div class="menu-card-foot"><div class="price">Rs 400</div><button class="order-btn" onclick="addToCart('Lasagna Box Small',400,'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="fries">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600&q=80" alt="Lasagna Box Medium" loading="lazy"><div class="menu-badge">🍝 Medium</div></div>
+        <div class="menu-card-body"><h3>Lasagna Box Medium</h3><p>A generous medium portion of our creamy baked lasagna — sharing is optional!</p>
+          <div class="menu-card-foot"><div class="price">Rs 700</div><button class="order-btn" onclick="addToCart('Lasagna Box Medium',700,'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <!-- ══ RICE ══ -->
+      <div class="menu-card glass" data-cat="rice">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=600&q=80" alt="Chicken Fried Rice" loading="lazy"><div class="menu-badge">🍚 Half</div></div>
+        <div class="menu-card-body"><h3>Chicken Fried Rice</h3><p>Wok-tossed rice with tender chicken pieces, spring onions and soy sauce.</p>
+          <div class="menu-card-foot"><div class="price">Rs 400 <span>Half</span></div><button class="order-btn" onclick="addToCart('Chicken Fried Rice (Half)',400,'https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="rice">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=600&q=80" alt="Masala Rice" loading="lazy"><div class="menu-badge">🌶️ Masala</div></div>
+        <div class="menu-card-body"><h3>Masala Rice</h3><p>Fragrant basmati rice cooked with aromatic desi masala spices and herbs.</p>
+          <div class="menu-card-foot"><div class="price">Rs 400 <span>Half</span></div><button class="order-btn" onclick="addToCart('Masala Rice (Half)',400,'https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="rice">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=600&q=80" alt="Egg Fried Rice" loading="lazy"><div class="menu-badge">🥚 Egg</div></div>
+        <div class="menu-card-body"><h3>Egg Fried Rice</h3><p>Classic egg fried rice with scrambled eggs, veggies and a light soy glaze.</p>
+          <div class="menu-card-foot"><div class="price">Rs 400 <span>Half</span></div><button class="order-btn" onclick="addToCart('Egg Fried Rice (Half)',400,'https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="rice">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=600&q=80" alt="Munch Special Rice" loading="lazy"><div class="menu-badge">⭐ Special</div></div>
+        <div class="menu-card-body"><h3>Munch Special Rice</h3><p>Our chef's special rice creation packed with mixed meat, veggies and bold spices.</p>
+          <div class="menu-card-foot"><div class="price">Rs 500 <span>Half</span></div><button class="order-btn" onclick="addToCart('Munch Special Rice (Half)',500,'https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <!-- ══ DEALS ══ -->
+      <div class="menu-card glass" data-cat="deals">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1561758033-d89a9ad46330?w=600&q=80" alt="Best Buddies Deal" loading="lazy"><div class="menu-badge">👯 Buddies</div></div>
+        <div class="menu-card-body"><h3>Best Buddies Deal</h3><p>4 Zinger Burger + 1 Ltr Drink — perfect for sharing with your bestie!</p>
+          <div class="menu-card-foot"><div class="price">Rs 1499</div><button class="order-btn" onclick="addToCart('Best Buddies Deal',1499,'https://images.unsplash.com/photo-1561758033-d89a9ad46330?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="deals">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&q=80" alt="Crystal Deal" loading="lazy"><div class="menu-badge">💎 Crystal</div></div>
+        <div class="menu-card-body"><h3>Crystal Deal</h3><p>2 Zinger Tower Burger + Cheese + Fries + 1 Ltr Drink.</p>
+          <div class="menu-card-foot"><div class="price">Rs 1150</div><button class="order-btn" onclick="addToCart('Crystal Deal',1150,'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="deals">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1550547660-d9450f859349?w=600&q=80" alt="Solo Deal" loading="lazy"><div class="menu-badge">🧍 Solo</div></div>
+        <div class="menu-card-body"><h3>Solo Deal</h3><p>Small Pizza + Zinger Burger + Can — the perfect meal for one.</p>
+          <div class="menu-card-foot"><div class="price">Rs 1050</div><button class="order-btn" onclick="addToCart('Solo Deal',1050,'https://images.unsplash.com/photo-1550547660-d9450f859349?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="deals">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?w=600&q=80" alt="Jumbo Deal" loading="lazy"><div class="menu-badge">🎯 Jumbo</div></div>
+        <div class="menu-card-body"><h3>Jumbo Deal</h3><p>5 Chicken Burger + Tikka Burger + 1 Ltr Drink — eat like a champion!</p>
+          <div class="menu-card-foot"><div class="price">Rs 1299</div><button class="order-btn" onclick="addToCart('Jumbo Deal',1299,'https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="deals">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=600&q=80" alt="Family Deal" loading="lazy"><div class="menu-badge">👨‍👩‍👧‍👦 Family</div></div>
+        <div class="menu-card-body"><h3>Family Deal</h3><p>2 Medium Pizza + 10 Pcs Hot Wings + Regular Fries + 2 Paratha Roll + 1.5 Ltr Drink.</p>
+          <div class="menu-card-foot"><div class="price">Rs 3499</div><button class="order-btn" onclick="addToCart('Family Deal',3499,'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="deals">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="Birthday Deal" loading="lazy"><div class="menu-badge">🎂 Birthday</div></div>
+        <div class="menu-card-body"><h3>Birthday Deal</h3><p>3 Large Pizza + 2 Pound Cake + 15 Hot Wings + 2 Russian Salad + Shawarma + Fries + 1.5 Ltr Drink.</p>
+          <div class="menu-card-foot"><div class="price">Rs 7999</div><button class="order-btn" onclick="addToCart('Birthday Deal',7999,'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="deals">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&q=80" alt="Golden Meal" loading="lazy"><div class="menu-badge">🥇 Golden</div></div>
+        <div class="menu-card-body"><h3>Golden Meal</h3><p>1 Zinger Burger + 2 Pcs Wings + Fries + Regular Drink — value at its best.</p>
+          <div class="menu-card-foot"><div class="price">Rs 600</div><button class="order-btn" onclick="addToCart('Golden Meal',600,'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="deals">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1562802378-063ec186a863?w=600&q=80" alt="Kids Meal" loading="lazy"><div class="menu-badge">🧒 Kids</div></div>
+        <div class="menu-card-body"><h3>Kids Meal</h3><p>1 Chicken Burger + 4 Pcs Nuggets + Fries + 1 Juice + Toy — little ones will love it!</p>
+          <div class="menu-card-foot"><div class="price">Rs 500</div><button class="order-btn" onclick="addToCart('Kids Meal',500,'https://images.unsplash.com/photo-1562802378-063ec186a863?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <!-- Mega Deals -->
+      <div class="menu-card glass" data-cat="deals">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1571066811602-716837d681de?w=600&q=80" alt="3 Small Pizza Mega Deal" loading="lazy"><div class="menu-badge">🍕 Mega</div></div>
+        <div class="menu-card-body"><h3>3 Small Pizza + 1 Ltr Drink</h3><p>Three small pizzas of your choice plus a 1 Ltr drink — Munch Mega Deal!</p>
+          <div class="menu-card-foot"><div class="price">Rs 2050</div><button class="order-btn" onclick="addToCart('3 Small Pizza + 1 Ltr Drink',2050,'https://images.unsplash.com/photo-1571066811602-716837d681de?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="deals">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=600&q=80" alt="3 Medium Pizza Mega Deal" loading="lazy"><div class="menu-badge">🍕🍕 Mega</div></div>
+        <div class="menu-card-body"><h3>3 Medium Pizza + 1.5 Ltr Drink</h3><p>Three medium pizzas of your choice plus a 1.5 Ltr drink — great value!</p>
+          <div class="menu-card-foot"><div class="price">Rs 2950</div><button class="order-btn" onclick="addToCart('3 Medium Pizza + 1.5 Ltr Drink',2950,'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="deals">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?w=600&q=80" alt="3 Large Pizza Mega Deal" loading="lazy"><div class="menu-badge">🍕🍕🍕 Mega XL</div></div>
+        <div class="menu-card-body"><h3>3 Large Pizza + 1.5 Ltr Drink</h3><p>Three large pizzas plus a 1.5 Ltr drink — feed the whole squad!</p>
+          <div class="menu-card-foot"><div class="price">Rs 4650</div><button class="order-btn" onclick="addToCart('3 Large Pizza + 1.5 Ltr Drink',4650,'https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <!-- ══ DRINKS ══ -->
+      <div class="menu-card glass" data-cat="drinks">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1581636625402-29b2a704ef13?w=600&q=80" alt="1 Ltr Drink" loading="lazy"><div class="menu-badge">🥤 Cold</div></div>
+        <div class="menu-card-body"><h3>1 Ltr Drink</h3><p>Chilled 1 litre cold drink to go with your meal — refreshing and ice cold.</p>
+          <div class="menu-card-foot"><div class="price">Rs 140</div><button class="order-btn" onclick="addToCart('1 Ltr Drink',140,'https://images.unsplash.com/photo-1581636625402-29b2a704ef13?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="drinks">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1581636625402-29b2a704ef13?w=600&q=80" alt="1.5 Ltr Drink" loading="lazy"><div class="menu-badge">🥤 Large</div></div>
+        <div class="menu-card-body"><h3>1.5 Ltr Drink</h3><p>Extra large 1.5 litre cold drink — perfect for sharing with the family.</p>
+          <div class="menu-card-foot"><div class="price">Rs 220</div><button class="order-btn" onclick="addToCart('1.5 Ltr Drink',220,'https://images.unsplash.com/photo-1581636625402-29b2a704ef13?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="drinks">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=600&q=80" alt="Sting 250ml" loading="lazy"><div class="menu-badge">⚡ Energy</div></div>
+        <div class="menu-card-body"><h3>Sting 250ml</h3><p>Sting energy drink 250ml — get that energy boost with your meal.</p>
+          <div class="menu-card-foot"><div class="price">Rs 80</div><button class="order-btn" onclick="addToCart('Sting 250ml',80,'https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="drinks">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=600&q=80" alt="Sting 500ml" loading="lazy"><div class="menu-badge">⚡ Big</div></div>
+        <div class="menu-card-body"><h3>Sting 500ml</h3><p>Big bottle Sting energy drink 500ml for double the energy and flavour.</p>
+          <div class="menu-card-foot"><div class="price">Rs 130</div><button class="order-btn" onclick="addToCart('Sting 500ml',130,'https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="drinks">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1581636625402-29b2a704ef13?w=600&q=80" alt="Can" loading="lazy"><div class="menu-badge">🥫 Can</div></div>
+        <div class="menu-card-body"><h3>Can</h3><p>Chilled soft drink can — the classic companion to any fast food meal.</p>
+          <div class="menu-card-foot"><div class="price">Rs 120</div><button class="order-btn" onclick="addToCart('Can',120,'https://images.unsplash.com/photo-1581636625402-29b2a704ef13?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="drinks">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1534353436294-0dbd4bdac845?w=600&q=80" alt="Slice Juice" loading="lazy"><div class="menu-badge">🍊 Juice</div></div>
+        <div class="menu-card-body"><h3>Slice Juice</h3><p>Refreshing Slice mango juice — a fruity treat to go with your meal.</p>
+          <div class="menu-card-foot"><div class="price">Rs 70</div><button class="order-btn" onclick="addToCart('Slice Juice',70,'https://images.unsplash.com/photo-1534353436294-0dbd4bdac845?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="drinks">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=600&q=80" alt="Mineral Water Small" loading="lazy"><div class="menu-badge">💧 Water</div></div>
+        <div class="menu-card-body"><h3>Mineral Water Small</h3><p>Small chilled mineral water bottle — stay hydrated with every meal.</p>
+          <div class="menu-card-foot"><div class="price">Rs 50</div><button class="order-btn" onclick="addToCart('Mineral Water Small',50,'https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="drinks">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=600&q=80" alt="Mineral Water Large" loading="lazy"><div class="menu-badge">💧 Large</div></div>
+        <div class="menu-card-body"><h3>Mineral Water Large</h3><p>Large mineral water bottle — great for the table when dining with family.</p>
+          <div class="menu-card-foot"><div class="price">Rs 100</div><button class="order-btn" onclick="addToCart('Mineral Water Large',100,'https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+      <div class="menu-card glass" data-cat="drinks">
+        <div class="menu-card-img"><img src="https://images.unsplash.com/photo-1581636625402-29b2a704ef13?w=600&q=80" alt="Regular Drink" loading="lazy"><div class="menu-badge">🥤 Regular</div></div>
+        <div class="menu-card-body"><h3>Regular Drink</h3><p>Regular chilled soft drink served fresh with your order.</p>
+          <div class="menu-card-foot"><div class="price">Rs 70</div><button class="order-btn" onclick="addToCart('Regular Drink',70,'https://images.unsplash.com/photo-1581636625402-29b2a704ef13?w=120&q=70',this)"><i class="fa fa-plus"></i> Add</button></div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── GALLERY ────────────────────────────────────────────── -->
+<section id="gallery">
+  <div class="container">
+    <div class="tag">Gallery</div>
+    <h2 class="section-title">A Feast for <span>The Eyes</span></h2>
+    <p class="section-sub">Fresh food. Great vibes. Every single day.</p>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=700&q=80" alt="Burger">
+        <div class="gallery-overlay">Juicy Burgers</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?w=500&q=80" alt="Pizza">
+        <div class="gallery-overlay">Wood-fired Pizza</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=500&q=80" alt="Fries">
+        <div class="gallery-overlay">Crispy Fries</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1519984388953-d2406bc725e1?w=700&q=80" alt="Restaurant Vibe">
+        <div class="gallery-overlay">Great Vibes</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1527477396000-e27163b481c2?w=500&q=80" alt="Wings">
+        <div class="gallery-overlay">Hot Wings</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?w=500&q=80" alt="Chicken Burger">
+        <div class="gallery-overlay">Chicken Burgers</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ABOUT ──────────────────────────────────────────────── -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img">
+        <img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=800&q=80" alt="Munch Fast Food Restaurant" loading="lazy">
+        <div class="about-badge">Since<br>2018</div>
+      </div>
+      <div>
+        <div class="tag">Our Story</div>
+        <h2 class="section-title">Taste That Keeps <span>You Coming</span> Back</h2>
+        <p style="color:var(--muted);line-height:1.8;margin-bottom:24px">
+          Munch Fast Food is a popular fast-food restaurant in Kohat known for its delicious burgers, crispy fries, wings and special pizzas. With affordable prices and great taste, it has become a favorite spot for families and friends.
+        </p>
+        <p style="color:var(--muted);line-height:1.8;margin-bottom:28px">
+          Located at Old Bus Stand, Kohat, we pride ourselves on using fresh ingredients and time-tested recipes to deliver meals that bring smiles — whether you're dining in or ordering to go.
+        </p>
+        <div class="about-features">
+          <div class="about-feat"><i class="fa fa-check-circle"></i> Fresh Ingredients Daily</div>
+          <div class="about-feat"><i class="fa fa-check-circle"></i> Affordable Prices</div>
+          <div class="about-feat"><i class="fa fa-check-circle"></i> Family Friendly</div>
+          <div class="about-feat"><i class="fa fa-check-circle"></i> Fast Service</div>
+          <div class="about-feat"><i class="fa fa-check-circle"></i> Dine-in &amp; Takeaway</div>
+          <div class="about-feat"><i class="fa fa-check-circle"></i> Open till 12 AM</div>
+        </div>
+        <a href="#order" class="btn btn-red" style="margin-top:32px"><i class="fa fa-arrow-right"></i> Order Now</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ORDER FORM ─────────────────────────────────────────── -->
+<section id="order" style="background:var(--dark2)">
+  <div class="container">
+    <div class="tag">Place Order</div>
+    <h2 class="section-title" style="text-align:center">Order <span>Online</span></h2>
+    <p class="section-sub" style="text-align:center;margin:0 auto 40px">Fill in your details and we'll get your order ready.</p>
+    <div class="order-wrapper">
+      <div class="glass" style="border-radius:var(--radius);padding:40px">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Your Name</label>
+            <input type="text" id="fname" placeholder="e.g. Ahmed Khan" required>
+          </div>
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" id="fphone" placeholder="+92 300 0000000" required>
+          </div>
+          <div class="form-group">
+            <label>Service Type</label>
+            <select id="fservice">
+              <option value="Delivery">🛵 Delivery</option>
+              <option value="Dine-in">🍽️ Dine-in</option>
+              <option value="Drive-through">🚗 Drive-through</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Address (if delivery)</label>
+            <input type="text" id="faddress" placeholder="Street, Area, Kohat">
+          </div>
+          <div class="form-group full">
+            <label>Order Details</label>
+            <textarea id="fdetails" placeholder="e.g. 2x Zinger Burger, 1x Special Pizza, 2x Fries..."></textarea>
+          </div>
+        </div>
+        <button class="btn btn-red form-submit" onclick="submitOrder()"><i class="fa fa-paper-plane"></i> &nbsp;Send Order</button>
+        <div class="success-msg" id="successMsg">✅ Order sent! We'll call you shortly to confirm.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SERVICES ──────────────────────────────────────────── -->
+<section id="services">
+  <div class="container">
+    <div class="tag">How We Serve</div>
+    <h2 class="section-title">Order Your <span>Way</span></h2>
+    <p class="section-sub">Flexible options to get your Munch fix however you like it.</p>
+    <div class="services-grid">
+      <div class="service-card glass">
+        <div class="service-icon">🍽️</div>
+        <h3>Dine-In</h3>
+        <p>Come over and enjoy a relaxed meal with family and friends in our comfortable seating area at Old Bus Stand, Kohat.</p>
+      </div>
+      <div class="service-card glass">
+        <div class="service-icon">🚗</div>
+        <h3>Drive-Through</h3>
+        <p>Pull up, place your order, and drive away with piping-hot food without even stepping out of your car.</p>
+      </div>
+      <div class="service-card glass">
+        <div class="service-icon">🛵</div>
+        <h3>Delivery</h3>
+        <p>Order from the comfort of your home. We deliver hot, fresh food right to your doorstep across Kohat.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── REVIEWS ───────────────────────────────────────────── -->
+<section id="reviews">
+  <div class="container">
+    <div class="tag">Reviews</div>
+    <div class="reviews-header">
+      <div>
+        <h2 class="section-title">What Our <span>Customers</span> Say</h2>
+        <p class="section-sub" style="margin-bottom:0">Real reviews from our happy customers.</p>
+      </div>
+      <div class="rating-big">
+        <div class="rating-number">4.2</div>
+        <div class="rating-info">
+          <div class="stars">★★★★☆</div>
+          <p>Based on 120 reviews</p>
+        </div>
+      </div>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card glass">
+        <div class="reviewer">
+          <div class="reviewer-avatar">A</div>
+          <div><div class="reviewer-name">Ahmed K.</div><div class="reviewer-date">March 2025</div></div>
+        </div>
+        <div class="review-stars">★★★★★</div>
+        <p>"Food was good and prices were reasonable. The zinger burger is absolutely amazing. Will definitely come back!"</p>
+      </div>
+      <div class="review-card glass">
+        <div class="reviewer">
+          <div class="reviewer-avatar">S</div>
+          <div><div class="reviewer-name">Sara M.</div><div class="reviewer-date">February 2025</div></div>
+        </div>
+        <div class="review-stars">★★★★☆</div>
+        <p>"Great taste and affordable menu. The chicken tikka pizza is a must-try. Staff is friendly and service is fast."</p>
+      </div>
+      <div class="review-card glass">
+        <div class="reviewer">
+          <div class="reviewer-avatar">U</div>
+          <div><div class="reviewer-name">Usman R.</div><div class="reviewer-date">January 2025</div></div>
+        </div>
+        <div class="review-stars">★★★★☆</div>
+        <p>"Been coming here for over a year. Consistent quality and the fries are always crispy. Best fast food in Kohat!"</p>
+      </div>
+      <div class="review-card glass">
+        <div class="reviewer">
+          <div class="reviewer-avatar">F</div>
+          <div><div class="reviewer-name">Fatima Z.</div><div class="reviewer-date">December 2024</div></div>
+        </div>
+        <div class="review-stars">★★★★★</div>
+        <p>"Loved the wings! Perfectly spiced and crispy. The whole family enjoyed the meal. Highly recommended for families."</p>
+      </div>
+      <div class="review-card glass">
+        <div class="reviewer">
+          <div class="reviewer-avatar">H</div>
+          <div><div class="reviewer-name">Hamza T.</div><div class="reviewer-date">November 2024</div></div>
+        </div>
+        <div class="review-stars">★★★★☆</div>
+        <p>"Drive-through is super convenient. The beef burger is massive and so filling. Great value for money in Kohat."</p>
+      </div>
+      <div class="review-card glass">
+        <div class="reviewer">
+          <div class="reviewer-avatar">N</div>
+          <div><div class="reviewer-name">Nadia A.</div><div class="reviewer-date">October 2024</div></div>
+        </div>
+        <div class="review-stars">★★★★★</div>
+        <p>"Delivery was on time and food was still hot. The BBQ pizza is our go-to weekend treat. Never disappoints!"</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CONTACT ───────────────────────────────────────────── -->
+<section id="contact">
+  <div class="container">
+    <div class="tag">Find Us</div>
+    <h2 class="section-title">Visit <span>Munch</span> Today</h2>
+    <p class="section-sub">We're open daily from morning till midnight. Come hungry!</p>
+    <div class="contact-grid">
+      <div>
+        <div class="contact-info-item">
+          <div class="contact-icon"><i class="fa fa-map-marker-alt"></i></div>
+          <div>
+            <h4>Location</h4>
+            <p>Old Bus Stand, Kohat, Khyber Pakhtunkhwa, Pakistan</p>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-icon"><i class="fa fa-phone"></i></div>
+          <div>
+            <h4>Phone</h4>
+            <a href="tel:+923349696888">+92 334 9696888</a>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-icon"><i class="fab fa-facebook"></i></div>
+          <div>
+            <h4>Facebook</h4>
+            <a href="https://facebook.com" target="_blank" rel="noopener">facebook.com/MunchFastFood</a>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-icon"><i class="fa fa-clock"></i></div>
+          <div>
+            <h4>Opening Hours</h4>
+          </div>
+        </div>
+        <div class="hours-grid">
+          <div class="hours-item"><span>Mon – Thu</span><span>10 AM – 12 AM</span></div>
+          <div class="hours-item"><span>Fri – Sat</span><span>10 AM – 12 AM</span></div>
+          <div class="hours-item"><span>Sunday</span><span>10 AM – 12 AM</span></div>
+          <div class="hours-item" style="background:rgba(214,40,40,.1);border:1px solid rgba(214,40,40,.2)"><span>Status</span><span style="color:var(--red)">Open Daily 🟢</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="map-embed">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3308.8!2d71.4439!3d33.5865!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38df7000000001%3A0x1!2sOld%20Bus%20Stand%2C%20Kohat%2C%20Pakistan!5e0!3m2!1sen!2spk!4v1711700000000!5m2!1sen!2spk" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap">
+          <a href="tel:+923349696888" class="btn btn-red"><i class="fa fa-phone"></i> Call Us</a>
+          <a href="https://wa.me/923349696888" target="_blank" class="btn btn-outline" style="border-color:#25D366;color:#25D366"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ────────────────────────────────────────────── -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">MUNCH <span>FAST FOOD</span></div>
+        <p>Kohat's favourite destination for burgers, pizza &amp; more. Serving great taste at great prices since 2018.</p>
+        <div class="footer-social">
+          <a href="https://facebook.com" class="social-btn" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://wa.me/923349696888" class="social-btn" target="_blank"><i class="fab fa-whatsapp"></i></a>
+          <a href="tel:+923349696888" class="social-btn"><i class="fa fa-phone"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#menu">Our Menu</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Menu</h4>
+        <ul>
+          <li><a href="#menu">Zinger Burger</a></li>
+          <li><a href="#menu">Chicken Burger</a></li>
+          <li><a href="#menu">Special Pizza</a></li>
+          <li><a href="#menu">Chicken Tikka Pizza</a></li>
+          <li><a href="#menu">French Fries</a></li>
+          <li><a href="#menu">Chicken Wings</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="#">📍 Old Bus Stand, Kohat</a></li>
+          <li><a href="tel:+923349696888">📞 +92 334 9696888</a></li>
+          <li><a href="https://facebook.com" target="_blank">🌐 Facebook Page</a></li>
+          <li><a href="#">⏰ Open Till 12 AM</a></li>
+          <li><a href="#">⭐ 4.2 / 5 Rating</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Munch Fast Food, Kohat. All rights reserved.</p>
+      <p style="color:var(--red)">Made with ❤️ in Kohat, Pakistan 🇵🇰</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ─── CART OVERLAY & DRAWER ─────────────────────────────── -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+<div class="cart-drawer glass" id="cartDrawer">
+  <div class="cart-head">
+    <h2>Your <span>Cart</span></h2>
+    <button class="cart-close" onclick="closeCart()"><i class="fa fa-times"></i></button>
+  </div>
+  <div class="cart-body" id="cartBody">
+    <div class="cart-empty" id="cartEmpty">
+      <i class="fa fa-shopping-bag"></i>
+      <p>Your cart is empty.<br>Add items from the menu!</p>
+    </div>
+  </div>
+  <div class="cart-foot" id="cartFoot" style="display:none">
+    <div class="cart-summary">
+      <div class="cart-row"><span>Subtotal</span><span id="cartSubtotal">Rs 0</span></div>
+      <div class="cart-row"><span>Delivery</span><span style="color:#4caf50">Free 🎉</span></div>
+      <div class="cart-row total"><span>Total</span><span id="cartTotal">Rs 0</span></div>
+    </div>
+    <button class="cart-checkout-btn" onclick="openCheckout()"><i class="fab fa-whatsapp"></i> Proceed to Checkout</button>
+    <button class="cart-clear-btn" onclick="clearCart()"><i class="fa fa-trash"></i> &nbsp;Clear Cart</button>
+  </div>
+</div>
+
+<!-- ─── CHECKOUT MODAL ────────────────────────────────────── -->
+<div class="checkout-modal" id="checkoutModal">
+  <div class="checkout-modal-bg" onclick="closeCheckout()"></div>
+  <div class="checkout-box glass">
+    <h2>Checkout <span>🧾</span></h2>
+    <p>Review your order and fill in details to send via WhatsApp.</p>
+    <div class="checkout-order-summary" id="coSummary"></div>
+    <div class="co-total"><span>Total</span><span id="coTotal">Rs 0</span></div>
+    <div class="checkout-form" style="margin-top:20px">
+      <div class="form-group"><label>Your Name</label><input type="text" id="coName" placeholder="e.g. Ahmed Khan"></div>
+      <div class="form-group"><label>Phone Number</label><input type="tel" id="coPhone" placeholder="+92 300 0000000"></div>
+      <div class="form-group">
+        <label>Service Type</label>
+        <select id="coService">
+          <option value="Delivery">🛵 Delivery</option>
+          <option value="Dine-in">🍽️ Dine-in</option>
+          <option value="Drive-through">🚗 Drive-through</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Delivery Address (if delivery)</label><input type="text" id="coAddress" placeholder="Street, Area, Kohat"></div>
+      <div class="form-group"><label>Special Instructions</label><input type="text" id="coNotes" placeholder="e.g. Extra sauce, no onions..."></div>
+    </div>
+    <div class="checkout-actions">
+      <button class="btn btn-outline" onclick="closeCheckout()"><i class="fa fa-arrow-left"></i> Back</button>
+      <button class="btn btn-red" onclick="sendWhatsAppOrder()"><i class="fab fa-whatsapp"></i> Send Order</button>
+    </div>
+  </div>
+</div>
+
+<!-- ─── FLOATING BUTTONS ───────────────────────────────────── -->
+<div class="floating-btns">
+  <button class="fab fab-cart" onclick="openCart()" title="View Cart">
+    <i class="fa fa-shopping-cart"></i>
+    <span class="cart-badge" id="cartBadge">0</span>
+  </button>
+  <a href="https://wa.me/923349696888?text=Hi%2C%20I%20want%20to%20place%20an%20order%20at%20Munch%20Fast%20Food" target="_blank" class="fab fab-wa" title="Order on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+  <button class="fab fab-top" id="fabTop" onclick="scrollToTop()" title="Back to top">
+    <i class="fa fa-chevron-up"></i>
+  </button>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════════════
+//  CART STATE
+// ══════════════════════════════════════════════════════════════
+let cart = []; // [{name, price, img, qty}]
+
+// ── Navbar scroll ──────────────────────────────────────────
+const navbar = document.getElementById('navbar');
+const fabTop = document.getElementById('fabTop');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 40);
+  fabTop.classList.toggle('visible', window.scrollY > 400);
+});
+
+// ── Hamburger ──────────────────────────────────────────────
+const ham = document.getElementById('hamburger');
+const mob = document.getElementById('mobileMenu');
+ham.addEventListener('click', () => {
+  ham.classList.toggle('open');
+  mob.style.display = mob.style.display === 'block' ? 'none' : 'block';
+});
+function closeMenu() {
+  ham.classList.remove('open');
+  mob.style.display = 'none';
+}
+
+// ── Menu filter ────────────────────────────────────────────
+const filterBtns = document.querySelectorAll('.filter-btn');
+const menuCards  = document.querySelectorAll('.menu-card');
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const cat = btn.dataset.cat;
+    menuCards.forEach((card, i) => {
+      const show = cat === 'all' || card.dataset.cat === cat;
+      card.classList.toggle('hidden', !show);
+      if (show) {
+        card.style.animationDelay = (i * 0.05) + 's';
+        card.style.animation = 'none';
+        void card.offsetWidth;
+        card.style.animation = '';
+      }
+    });
+  });
+});
+
+// ══════════════════════════════════════════════════════════════
+//  CART FUNCTIONS
+// ══════════════════════════════════════════════════════════════
+
+function addToCart(name, price, img, btn) {
+  const existing = cart.find(i => i.name === name);
+  if (existing) {
+    existing.qty++;
+  } else {
+    cart.push({ name, price, img, qty: 1 });
+  }
+  // Button feedback
+  btn.classList.add('added');
+  btn.innerHTML = '<i class="fa fa-check"></i> Added!';
+  setTimeout(() => {
+    btn.classList.remove('added');
+    btn.innerHTML = '<i class="fa fa-plus"></i> Add';
+  }, 1400);
+
+  renderCart();
+  updateBadge();
+  // Flash cart badge
+  const badge = document.getElementById('cartBadge');
+  badge.style.transform = 'scale(1.5)';
+  setTimeout(() => badge.style.transform = 'scale(1)', 250);
+}
+
+function changeQty(name, delta) {
+  const item = cart.find(i => i.name === name);
+  if (!item) return;
+  item.qty += delta;
+  if (item.qty <= 0) cart = cart.filter(i => i.name !== name);
+  renderCart();
+  updateBadge();
+}
+
+function removeItem(name) {
+  cart = cart.filter(i => i.name !== name);
+  renderCart();
+  updateBadge();
+}
+
+function clearCart() {
+  cart = [];
+  renderCart();
+  updateBadge();
+}
+
+function cartTotal() {
+  return cart.reduce((s, i) => s + i.price * i.qty, 0);
+}
+
+function cartCount() {
+  return cart.reduce((s, i) => s + i.qty, 0);
+}
+
+function updateBadge() {
+  const badge = document.getElementById('cartBadge');
+  const count = cartCount();
+  badge.textContent = count;
+  badge.classList.toggle('show', count > 0);
+}
+
+function renderCart() {
+  const body  = document.getElementById('cartBody');
+  const foot  = document.getElementById('cartFoot');
+  const empty = document.getElementById('cartEmpty');
+
+  if (cart.length === 0) {
+    // Remove all cart items (keep empty msg)
+    body.querySelectorAll('.cart-item').forEach(el => el.remove());
+    empty.style.display = 'block';
+    foot.style.display  = 'none';
+    return;
+  }
+
+  empty.style.display = 'none';
+  foot.style.display  = 'block';
+
+  // Re-render items
+  body.querySelectorAll('.cart-item').forEach(el => el.remove());
+  cart.forEach(item => {
+    const div = document.createElement('div');
+    div.className = 'cart-item';
+    div.innerHTML = `
+      <img class="cart-item-img" src="${item.img}" alt="${item.name}">
+      <div class="cart-item-info">
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-price">Rs ${(item.price * item.qty).toLocaleString()}</div>
+        <div class="cart-item-controls">
+          <button class="qty-btn" onclick="changeQty('${item.name}',-1)">−</button>
+          <span class="qty-num">${item.qty}</span>
+          <button class="qty-btn" onclick="changeQty('${item.name}',1)">+</button>
+        </div>
+      </div>
+      <button class="cart-item-del" onclick="removeItem('${item.name}')"><i class="fa fa-trash"></i></button>
+    `;
+    body.insertBefore(div, empty);
+  });
+
+  const total = cartTotal();
+  document.getElementById('cartSubtotal').textContent = 'Rs ' + total.toLocaleString();
+  document.getElementById('cartTotal').textContent    = 'Rs ' + total.toLocaleString();
+}
+
+function openCart() {
+  document.getElementById('cartDrawer').classList.add('open');
+  document.getElementById('cartOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeCart() {
+  document.getElementById('cartDrawer').classList.remove('open');
+  document.getElementById('cartOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ── Checkout modal ─────────────────────────────────────────
+function openCheckout() {
+  if (cart.length === 0) return;
+  // Populate summary
+  const summary = document.getElementById('coSummary');
+  summary.innerHTML = '';
+  cart.forEach(item => {
+    const row = document.createElement('div');
+    row.className = 'co-item';
+    row.innerHTML = `<span>${item.qty}× ${item.name}</span><span>Rs ${(item.price * item.qty).toLocaleString()}</span>`;
+    summary.appendChild(row);
+  });
+  document.getElementById('coTotal').textContent = 'Rs ' + cartTotal().toLocaleString();
+  closeCart();
+  document.getElementById('checkoutModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeCheckout() {
+  document.getElementById('checkoutModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function sendWhatsAppOrder() {
+  const name    = document.getElementById('coName').value.trim();
+  const phone   = document.getElementById('coPhone').value.trim();
+  const service = document.getElementById('coService').value;
+  const address = document.getElementById('coAddress').value.trim();
+  const notes   = document.getElementById('coNotes').value.trim();
+
+  if (!name || !phone) { alert('Please enter your Name and Phone number.'); return; }
+
+  let orderLines = cart.map(i => `  • ${i.qty}× ${i.name} — Rs ${(i.price * i.qty).toLocaleString()}`).join('\n');
+  const msg = `🍔 *New Order – Munch Fast Food*\n\n` +
+    `👤 Name: ${name}\n📞 Phone: ${phone}\n🚀 Service: ${service}\n` +
+    `📍 Address: ${address || 'N/A'}\n\n` +
+    `🛒 *Order:*\n${orderLines}\n\n` +
+    `💰 *Total: Rs ${cartTotal().toLocaleString()}*\n` +
+    (notes ? `📝 Notes: ${notes}` : '');
+
+  window.open(`https://wa.me/923349696888?text=${encodeURIComponent(msg)}`, '_blank');
+  closeCheckout();
+  cart = [];
+  renderCart();
+  updateBadge();
+}
+
+// ── Back to top ────────────────────────────────────────────
+function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+// ── Intersection observer for cards ────────────────────────
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.style.opacity = '1'; } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.menu-card,.review-card,.service-card').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transition = 'opacity .5s ease';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
